@@ -1,3 +1,4 @@
+#!/usr/bin/env python3
 #This python code will mainly be used for calling RsaCTFTool to run a predetermined RSA 'crack'
 
 #Will make it so that It will listen on a port to 
