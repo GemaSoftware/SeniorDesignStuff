@@ -36,7 +36,10 @@ if __name__ == "__main__":
 
         x = str(stdout)
         y = str(stderr)
-        x, y
+        print("output")
+        print(x)
+        print("error")
+        print(y)
         conn.send(str.encode('Running RSA cracking\n'))
         conn.send(str.encode("Finished running on Docker\n"))
         conn.send(str.encode(x))
