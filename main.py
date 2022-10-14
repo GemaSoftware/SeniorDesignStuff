@@ -32,6 +32,10 @@ if __name__ == "__main__":
         stdout, stderr = process.communicate()
         stdout, stderr
         conn.send(str.encode('Running RSA cracking\n'))
+        conn.send(str.encode("Finished running on Docker\n"))
+        conn.send(str.encode(stdout))
+        conn.send(str.encode("Error:\n"))
+        conn.send(str.encode(stderr))
         conn.close()
 
 
