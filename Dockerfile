@@ -79,7 +79,8 @@ RUN sed -i "s/% threads=1/threads=$(nproc --all)/g" /usr/bin/yafu.ini && \
     sed -i 's/ecm_path=\.\.\\gmp-ecm\\bin\\x64\\Release\\ecm.exe/ecm_path=\/usr\/bin\/ecm/g' /usr/bin/yafu.ini
 
 WORKDIR /opt
-RUN git clone https://github.com/GemaSoftware/SeniorDesignStuff.git
+ARG TEST_CACHE=1
+RUN git clone https://github.com/GemaSoftware/SeniorDesignStuff.git --no-cache
 RUN git clone https://github.com/Ganapati/RsaCtfTool.git
 WORKDIR /opt/RsaCtfTool
 RUN python3 -m pip install -r "requirements.txt"
