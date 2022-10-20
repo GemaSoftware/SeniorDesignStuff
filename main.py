@@ -28,7 +28,7 @@ if __name__ == "__main__":
             string_data = data.decode('utf-8')
 
         conn.send(str.encode('Will now run the RSA stuff.\n'))
-        strOut = subprocess.check_output(['/opt/RsaCtfTool/RsaCtfTool.py', '--attack partial_q', '--key /opt/RsaCtfTool/examples/masked.pem'])
+        strOut = subprocess.check_output(['/opt/RsaCtfTool/RsaCtfTool.py', '--key', '/opt/RsaCtfTool/examples/masked.pem', '--attack', 'partial_q'])
         
         #stdout, stderr
 
