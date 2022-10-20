@@ -35,8 +35,6 @@ if __name__ == "__main__":
         conn.send(str.encode('Running RSA cracking\n'))
         conn.send(str.encode("Finished running on Docker\n"))
         conn.send(strOut)
-        conn.send(str.encode("Error:\n"))
-        conn.send(str.encode(y))
         conn.close()
 
 
