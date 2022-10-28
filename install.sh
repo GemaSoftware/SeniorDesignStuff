@@ -28,7 +28,7 @@ checkforSkupper () {
         else
                 echo "LOG::::::SKUPPER NOT INSTALLED. INSTALLING SKUPPER"
                 curl https://skupper.io/install.sh | sh
-                #adds user to path
+                #adds skupper location to PATH
                 export PATH="$(eval echo ~$user)/bin:$PATH"
                 return 0;
         fi
