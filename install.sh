@@ -11,12 +11,26 @@ createDockerImages () {
         docker build --tag mainrsacracking ${maindirname}/MainImage
 }
 
+#Checks if kubernetes installed.
 checkforKube () {
         if [[ -x "$(which kubectl)" ]]; then
                 return 0;
         else
                 echo "LOG::::::KUBECTL NOT INSTALLED. TERMINATING"
                 exit 1;
+        fi
+}
+
+checkforSkupper () {
+        if [[ -f "$(eval echo ~$user)/bin/skupper" ]]; then
+                echo "LOG:::::::SKUPPER ALREADY INSTALLED, SKIPPING"
+                return 0;
+        else
+                echo "LOG::::::SKUPPER NOT INSTALLED. INSTALLING SKUPPER"
+                curl https://skupper.io/install.sh | sh
+                #adds user to path
+                export PATH="$(eval echo ~$user)/bin:$PATH"
+                return 0;
         fi
 }
 
@@ -29,11 +43,11 @@ if [[ -x "$(which docker)" ]]; then
         echo "LOG::::::Docker images built successful."
         docker run -d  -p 1234:1337 mainrsacracking
         echo "LOG::::::Docker instance created as test. Now trying connection and output"
-        sleep 3s
-        echo "run" | nc -q 2 localhost 1234
+        sleep 3
+        echo "run" | nc -w 2 localhost 1234
         checkforKube
         echo "LOG::::::Installing Skupper"
-        curl https://skupper.io/install.sh | sh
+        checkforSkupper
         echo "LOG::::::SKUPPER INSTALLED"
 else
         echo "ERROR::::::Docker not installed"
